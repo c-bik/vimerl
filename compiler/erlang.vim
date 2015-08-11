@@ -31,7 +31,7 @@ if !exists("g:erlang_show_errors")
 	let g:erlang_show_errors = 1
 endif
 
-let s:erlang_check_file = expand("<sfile>:p:h") . "/erlang_check.erl"
+let s:erlang_check_file = expand("<sfile>:p:h") . "/erlang_check.escript"
 let s:autocmds_defined  = 0
 
 sign define ErlangError   text=>> texthl=Error
