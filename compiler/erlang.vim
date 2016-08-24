@@ -41,27 +41,27 @@ command ErlangDisableShowErrors silent call s:DisableShowErrors()
 command ErlangEnableShowErrors  silent call s:EnableShowErrors()
 
 function s:ShowErrors()
-	setlocal shellpipe=>
-	if match(getline(1), "#!.*escript") != -1
-		setlocal makeprg=escript\ -s\ %
-	else
-		execute "setlocal makeprg=" . s:erlang_check_file . "\\ \%"
-	endif
-	silent make!
-	for error in getqflist()
-		if error.lnum == 0
-			continue
-		endif
-		let item         = {}
-		let item["lnum"] = error.lnum
-		let item["text"] = error.text
-		let b:error_list[error.lnum] = item
-		let type = error.type == "W" ? "ErlangWarning" : "ErlangError"
-		execute "sign place" b:next_sign_id "line=" . item.lnum "name=" . type "file=" . expand("%:p")
-		let b:next_sign_id += 1
-	endfor
-	setlocal shellpipe&
-	setlocal makeprg=make
+	" setlocal shellpipe=>
+	" if match(getline(1), "#!.*escript") != -1
+	" 	setlocal makeprg=escript\ -s\ %
+	" else
+	" 	execute "setlocal makeprg=" . s:erlang_check_file . "\\ \%"
+	" endif
+	" silent make!
+	" for error in getqflist()
+	" 	if error.lnum == 0
+	" 		continue
+	" 	endif
+	" 	let item         = {}
+	" 	let item["lnum"] = error.lnum
+	" 	let item["text"] = error.text
+	" 	let b:error_list[error.lnum] = item
+	" 	let type = error.type == "W" ? "ErlangWarning" : "ErlangError"
+	" 	execute "sign place" b:next_sign_id "line=" . item.lnum "name=" . type "file=" . expand("%:p")
+	" 	let b:next_sign_id += 1
+	" endfor
+	" setlocal shellpipe&
+	" setlocal makeprg=make
 endfunction
 
 function s:ShowErrorMsg()
